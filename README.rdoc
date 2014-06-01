@@ -1,0 +1,44 @@
+* Install redis
+* Start the server redis-server
+
+* The application is taken from the tutorial
+http://jimneath.org/2011/03/24/using-redis-with-ruby-on-rails.html
+
+* Using Redis Objects
+https://github.com/nateware/redis-objects
+
+Including Redis::Objects in a model class makes it trivial to integrate Redis types with an existing ActiveRecord, DataMapper,
+Mongoid, or similar class. Redis::Objects will work with any class that provides an id method that returns a unique value.
+
+* Redis periodically dumps the data into dump.rdb file
+
+* To parse the .rdb file, we  have to use rdb-tools
+https://github.com/sripathikrishnan/redis-rdb-tools
+
+    a) We have to make crontab that will parse the file and move the data to mysql/postgres database
+
+    b) We can Export redis into a relational database like MySQL
+
+* Rdb tools in ruby
+https://github.com/nrk/redis-rdb
+
+
+* For caching like memcache use redis-store gem
+https://github.com/redis-store/redis-store
+
+* Some important commands
+
+Command	Overview
+sadd	Add member to the set stored at key. If member is already a member of this set, no operation is performed. If key does not exist, a new set is created with member as its sole member.
+srem	Remove member from the set stored at key. If member is not a member of this set, no operation is performed.
+smembers	Returns all the members of the set value stored at key.
+sinter	Returns the members of the set resulting from the intersection of all the given sets.
+scard	Returns the set cardinality (number of elements) of the set stored at key.
+sismember	Returns if member is a member of the set stored at key.
+multi	Marks the start of a transaction block. Subsequent commands will be queued for atomic execution using EXEC.
+
+* Start the redis-server
+redis-server redis.conf
+
+* Command to forcefully dump in memory redis data to rdb file
+redis-cli bgsave
